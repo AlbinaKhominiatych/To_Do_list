@@ -62,4 +62,3 @@ http POST http://127.0.0.1:8000/users/1/tasks/ title="Complete task" description
 ## Ліцензія
 
 Цей проект розповсюджується під ліцензією [MIT](LICENSE).
-```
