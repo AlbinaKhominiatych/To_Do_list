@@ -1,4 +1,3 @@
-```markdown
 # To-Do List App
 
 Це веб-додаток "Список справ", створений за допомогою FastAPI та SQLAlchemy.
