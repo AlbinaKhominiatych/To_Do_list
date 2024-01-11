@@ -1,64 +1,86 @@
-# To-Do List App
+# To-Do List API
 
-Це веб-додаток "Список справ", створений за допомогою FastAPI та SQLAlchemy.
+Це FastAPI веб-додаток для управління списком завдань (To-Do List).
 
 ## Встановлення
 
-1. Склонуйте репозиторій:
+1. Клонуйте репозиторій:
 
     ```bash
-    git clone https://github.com/yourusername/to-do-list-app.git
+    git clone https://github.com/your-username/your-repo.git
     ```
 
-2. Встановіть залежності:
+2. Перейдіть в каталог проєкту:
+
+    ```bash
+    cd your-repo
+    ```
+
+3. Встановіть залежності:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-## Запуск
+## Запуск додатку
 
-Запустіть сервер FastAPI:
+Використовуйте команду для запуску сервера Uvicorn:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Відкрийте ваш браузер та перейдіть за адресою [http://127.0.0.1:8000](http://127.0.0.1:8000).
+Після запуску, додаток буде доступний за адресою [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-## Використання
+## Використання API
 
-### Додавання нового користувача
+### Отримати всіх користувачів
 
-Використовуйте HTTP POST запит:
-
-```bash
-http POST http://127.0.0.1:8000/users/ title="John Doe" email="john@example.com"
+```http
+GET /users/
 ```
 
-### Додавання нового завдання користувачу
+### Створити нового користувача
 
-Використовуйте HTTP POST запит:
-
-```bash
-http POST http://127.0.0.1:8000/users/1/tasks/ title="Complete task" description="Finish the task" is_done=false
+```http
+POST /users/
 ```
 
-## Документація API
+```json
+{
+    "username": "new_user",
+    "email": "new_user@example.com"
+}
+```
 
-Додаткову інформацію про доступні ендпоінти можна знайти в [документації API](http://127.0.0.1:8000/docs).
+### Отримати всі завдання користувача
 
-## Структура проекту
+```http
+GET /users/{user_id}/tasks/
+```
 
-- `main.py`: Головний файл з FastAPI додатком та логікою маршрутів.
-- `models.py`: Моделі бази даних SQLAlchemy.
-- `schemas.py`: Схеми для валідації даних в запросах та відповідях.
-- `add_task.py`: Приклад скрипта для додавання завдань через HTTP запит.
+### Створити нове завдання для користувача
+
+```http
+POST /users/{user_id}/tasks/
+```
+
+```json
+{
+    "title": "Complete task",
+    "description": "Finish the task",
+    "is_done": false
+}
+```
+
+Та інші ендпойнти...
 
 ## Внесок
 
-Якщо у вас є пропозиції чи покращення, будь ласка, відкривайте нові [issues](https://github.com/AlbinaKhominiatych/to-do-list-app/issues) чи присилайте [pull requests](https://github.com/AlbinaKhominiatych/to-do-list-app/pulls).
+Якщо у вас є питання, помилки чи пропозиції, будь ласка, відкрийте [новий issue](https://github.com/AlbinaKhominiatyche/To_Do_list/issues).
+
+Якщо ви хочете внести свій внесок у вигляді нової функції чи виправлення, будь ласка, створіть [новий pull request](https://github.com/AlbinaKhominiatych/To_Do_list/pulls).
 
 ## Ліцензія
 
-Цей проект розповсюджується під ліцензією [MIT](LICENSE).
+Цей проєкт ліцензований під MIT License - деталі дивіться в файлі [LICENSE](LICENSE).
