@@ -63,19 +63,24 @@ def read_task(task_id: int, db: Session = Depends(get_db)) -> TaskSchema:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
 
+from sqlalchemy import update
+
 def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)) -> TaskSchema:
     # Updating information about a specific task
     db_task = db.query(Task).filter(Task.id == task_id).first()
     if db_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
 
-    db_task.title = task.title
-    db_task.description = task.description
-    db_task.is_done = task.is_done
+    # Create a dictionary with non-None values from TaskCreate
+    task_data = task.dict(exclude_none=True)
 
+    # Use the update statement to update the fields in the database
+    db.execute(update(Task).where(Task.id == task_id).values(**task_data))
     db.commit()
     db.refresh(db_task)
+
     return db_task
+
 
 def list_user_tasks(user_id: int, db: Session = Depends(get_db)) -> List[TaskSchema]:
     # We get all tasks for a specific user
