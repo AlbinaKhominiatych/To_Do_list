@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from models import User, Task, SessionLocal, engine
-from schemas import UserCreate, User as UserSchema, TaskCreate, Task as TaskSchema
+from models.models import User, Task, SessionLocal, engine
+from schemas.schemas import UserCreate, User as UserSchema, TaskCreate, Task as TaskSchema
 from typing import List
 from fastapi import HTTPException, Depends
 

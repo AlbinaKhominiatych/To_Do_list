@@ -3,7 +3,7 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from fastapi.responses import JSONResponse
 from typing import List
-from database import (
+from database.database import (
     get_db,
     list_users as db_list_users,  # Змінено ім'я тут
     create_user,
@@ -15,7 +15,7 @@ from database import (
     list_user_tasks,
     delete_task,
 )
-from schemas import UserCreate, User as UserSchema, TaskCreate, Task as TaskSchema
+from schemas.schemas import UserCreate, User as UserSchema, TaskCreate, Task as TaskSchema
 
 app = FastAPI()
 
