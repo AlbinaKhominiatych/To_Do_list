@@ -8,11 +8,11 @@ from typing import List
 
 app = FastAPI()
 
-# Створення таблиць в базі даних при запуску
+# Creating tables in the database at startup
 User.metadata.create_all(bind=engine)
 Task.metadata.create_all(bind=engine)
 
-# Функція для отримання сесії бази даних
+# A function to get a database session
 def get_db():
     db = SessionLocal()
     try:
@@ -31,7 +31,7 @@ def list_users(db: Session = Depends(get_db)):
 
 @app.post("/users/", response_model=UserSchema)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    # Створення нового користувача
+    # Create a new user
     db_user = User(**user.dict())
     db.add(db_user)
     db.commit()
@@ -40,12 +40,12 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/users/{user_id}/tasks/", response_model=TaskSchema)
 def create_user_task(user_id: int, task: TaskCreate, db: Session = Depends(get_db)):
-    # Знайдіть користувача за його ідентифікатором
+    # Find a user by their ID
     db_user = db.query(User).filter(User.id == user_id).first()
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
 
-    # Видаліть user_id з task.dict()
+    # Remove user_id from task.dict()
     task_data = task.dict(exclude={"user_id"})
 
     # Створіть нове завдання для користувача
@@ -54,11 +54,6 @@ def create_user_task(user_id: int, task: TaskCreate, db: Session = Depends(get_d
     db.commit()
     db.refresh(db_task)
     return db_task
-
-
-
-
-
 
 @app.get("/tasks/", response_model=List[TaskSchema])
 def list_tasks(db: Session = Depends(get_db)):
@@ -78,17 +73,17 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
 
 @app.get("/tasks/{task_id}", response_model=TaskSchema)
 def read_task(task_id: int, db: Session = Depends(get_db)):
-    # Отримання інформації про конкретне завдання
+    # Getting information about a specific task
     task = db.query(Task).filter(Task.id == task_id).first()
     if task is None:
         raise HTTPException(status_code=404, detail="Task not found")
     return task
 
 
-# Зміни в аргументах update_task
+# Changes in update_task arguments
 @app.put("/tasks/{task_id}", response_model=TaskSchema)
 def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
-    # Оновлення інформації про конкретне завдання
+    # Updating information about a specific task
     db_task = db.query(Task).filter(Task.id == task_id).first()
     if db_task is None:
         raise HTTPException(status_code=404, detail="Task not found")
@@ -103,7 +98,7 @@ def update_task(task_id: int, task: TaskCreate, db: Session = Depends(get_db)):
 
 @app.get("/users/{user_id}/tasks/", response_model=List[TaskSchema])
 def list_user_tasks(user_id: int, db: Session = Depends(get_db)):
-    # Отримуємо всі завдання для конкретного користувача
+    # We get all tasks for a specific user
     tasks = db.query(Task).filter(Task.user_id == user_id).all()
     return tasks
 
