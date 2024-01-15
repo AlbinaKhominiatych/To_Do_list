@@ -1,46 +1,46 @@
 # To-Do List API
 
-Це FastAPI веб-додаток для управління списком завдань (To-Do List).
+This is a FastAPI web application for managing a To-Do List.
 
-## Встановлення
+## Installation
 
-1. Клонуйте репозиторій:
+1. Clone the repository:
 
-    ```bash
-    git clone https://github.com/your-username/your-repo.git
-    ```
+     ```bash
+     git clone https://github.com/your-username/your-repo.git
+     ```
 
-2. Перейдіть в каталог проєкту:
+2. Go to the project directory:
 
-    ```bash
-    cd your-repo
-    ```
+     ```bash
+     cd your-repo
+     ```
 
-3. Встановіть залежності:
+3. Install dependencies:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+     ```bash
+     pip install -r requirements.txt
+     ```
 
-## Запуск додатку
+## Start the application
 
-Використовуйте команду для запуску сервера Uvicorn:
+Use the command to start the Uvicorn server:
 
 ```bash
 uvicorn main:app --reload
 ```
 
-Після запуску, додаток буде доступний за адресою [http://127.0.0.1:8000](http://127.0.0.1:8000).
+After launch, the application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-## Використання API
+## Using the API
 
-### Отримати всіх користувачів
+### Get all users
 
 ```http
 GET /users/
 ```
 
-### Створити нового користувача
+### Create a new user
 
 ```http
 POST /users/
@@ -48,18 +48,18 @@ POST /users/
 
 ```json
 {
-    "username": "new_user",
-    "email": "new_user@example.com"
+     "username": "new_user",
+     "email": "new_user@example.com"
 }
 ```
 
-### Отримати всі завдання користувача
+### Get all user tasks
 
 ```http
 GET /users/{user_id}/tasks/
 ```
 
-### Створити нове завдання для користувача
+### Create a new task for the user
 
 ```http
 POST /users/{user_id}/tasks/
@@ -67,20 +67,20 @@ POST /users/{user_id}/tasks/
 
 ```json
 {
-    "title": "Complete task",
-    "description": "Finish the task",
-    "is_done": false
+     "title": "Complete task",
+     "description": "Finish the task",
+     "is_done": false
 }
 ```
 
-Та інші ендпойнти...
+And other endpoints...
 
-## Внесок
+## Contribution
 
-Якщо у вас є питання, помилки чи пропозиції, будь ласка, відкрийте [новий issue](https://github.com/AlbinaKhominiatyche/To_Do_list/issues).
+If you have questions, bugs or suggestions, please open a [new issue](https://github.com/AlbinaKhominiatyche/To_Do_list/issues).
 
-Якщо ви хочете внести свій внесок у вигляді нової функції чи виправлення, будь ласка, створіть [новий pull request](https://github.com/AlbinaKhominiatych/To_Do_list/pulls).
+If you want to contribute a new feature or fix, please create a [new pull request](https://github.com/AlbinaKhominiatych/To_Do_list/pulls).
 
-## Ліцензія
+## License
 
-Цей проєкт ліцензований під MIT License - деталі дивіться в файлі [LICENSE](LICENSE).
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
