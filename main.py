@@ -62,7 +62,7 @@ def list_tasks(db: Session = Depends(get_db)):
 
 @app.post("/tasks/", response_model=TaskSchema)
 def create_task(task: TaskCreate, db: Session = Depends(get_db)):
-    # Створення нового завдання
+    # Create a new task
     db_task = Task(**task.dict())
     db.add(db_task)
     db.commit()
